@@ -1,0 +1,20 @@
+{
+  "name": "cm",
+  "version": "0.1.0",
+  "description": "Store CLI commands with descriptions, fuzzy search, copy on Enter",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "cm": "./src/index.ts"
+  },
+  "scripts": {
+    "start": "bun src/index.ts",
+    "build": "bun build --compile src/index.ts --outfile cm.exe",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "bun-types": "^1.4.1",
+    "typescript": "^7.0.2"
+  }
+}

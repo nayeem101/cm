@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+.bun-cache/
+
+# Build output (compiled binary, rebuild with `bun run build`)
+cm.exe
+*.exe
+dist/
+build/
+out/
+
+# Local databases (prod DB lives at ~/.cm/cm.db, never in repo)
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+bun-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*~
+
+# Test / coverage
+coverage/
+.nyc_output/
