@@ -25,9 +25,9 @@ Usage:
   cm search|s [query]                  interactive search with initial query
   cm add|a "<command>" -d "<desc>" [-t tag1,tag2] [--cwd <path>|auto] [-g]
   cm list|ls|l [--json]                list all entries
-  cm rm|r|del|d <id|exact-command>     delete entry (substring only lists matches)
+  cm rm|r|d|del|remove|delete <id|exact-command>  delete entry (substring only lists matches)
   cm edit|e <id> [--command ...] [--desc ...] [--tags ...] [--cwd ...]
-  cm help|h                            show this help
+  cm help|h|--help|-h                  show this help
 
 Keys in search: type to filter · ↑↓ navigate · Enter copy+quit · Esc/Ctrl+C/Ctrl+X quit
 After Enter, paste with Ctrl+V.
@@ -103,7 +103,7 @@ async function main(): Promise<void> {
     const cwdFlag = getFlag(rest, "--cwd");
     const global = hasFlag(rest, "-g", "--global");
     if (!command) {
-      console.error('Usage: cm add "<command>" -d "<what it does>" [-t tags] [--cwd <path>] [-g]');
+      console.error('Usage: cm add|a "<command>" -d "<what it does>" [-t tags] [--cwd <path>] [-g]');
       process.exit(1);
     }
     const cwd = global ? "" : cwdFlag === "auto" || cwdFlag === undefined ? process.cwd() : cwdFlag;
@@ -134,7 +134,7 @@ async function main(): Promise<void> {
   if (cmd === "rm") {
     const target = rest[0];
     if (!target) {
-      console.error("Usage: cm rm <id|exact-command>");
+      console.error("Usage: cm rm|r|d|del|remove|delete <id|exact-command>");
       process.exit(1);
     }
     if (removeCommand(target)) {
@@ -158,7 +158,7 @@ async function main(): Promise<void> {
   if (cmd === "edit") {
     const id = Number(rest[0]);
     if (!id) {
-      console.error("Usage: cm edit <id> [--command ...] [--desc ...] [--tags ...] [--cwd ...]");
+      console.error("Usage: cm edit|e <id> [--command ...] [--desc ...] [--tags ...] [--cwd ...]");
       process.exit(1);
     }
     const patch: Record<string, string> = {};

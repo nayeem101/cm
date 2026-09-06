@@ -46,9 +46,9 @@ cm                                   # interactive search (default)
 cm search|s [query]                  # search with initial filter
 cm add|a "<command>" -d "<what it does>" [-t tag1,tag2] [--cwd <path>|auto] [-g]
 cm list|ls|l [--json]                # list all entries
-cm rm|r|del|d <id|exact-command>      # delete entry (a non-exact query only lists matches)
+cm rm|r|d|del|remove|delete <id|exact-command>  # delete entry (a non-exact query only lists matches)
 cm edit|e <id> [--command ...] [--desc ...] [--tags ...] [--cwd ...]
-cm help|h                            # show help
+cm help|h|--help|-h                  # show help
 ```
 
 Examples:
