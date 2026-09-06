@@ -3,16 +3,31 @@ import { addCommand, listCommands, removeCommand, findCommandsBySubstring, editC
 import { runSearchTui } from "./search";
 import { copyToClipboard } from "./clipboard";
 
+const COMMAND_ALIASES: Record<string, string> = {
+  s: "search",
+  a: "add",
+  l: "list",
+  ls: "list",
+  r: "rm",
+  del: "rm",
+  d: "rm",
+  remove: "rm",
+  delete: "rm",
+  e: "edit",
+  h: "help",
+};
+
 function help(): void {
   console.log(`cm — store CLI commands, fuzzy-search, copy on Enter
 
 Usage:
   cm                                   interactive search (default)
-  cm search [query]                    interactive search with initial query
-  cm add "<command>" -d "<desc>" [-t tag1,tag2] [--cwd <path>|auto] [-g]
-  cm list [--json]                     list all entries
-  cm rm <id|exact-command>            delete entry (substring only lists matches)
-  cm edit <id> [--command ...] [--desc ...] [--tags ...] [--cwd ...]
+  cm search|s [query]                  interactive search with initial query
+  cm add|a "<command>" -d "<desc>" [-t tag1,tag2] [--cwd <path>|auto] [-g]
+  cm list|ls|l [--json]                list all entries
+  cm rm|r|del|d <id|exact-command>     delete entry (substring only lists matches)
+  cm edit|e <id> [--command ...] [--desc ...] [--tags ...] [--cwd ...]
+  cm help|h                            show this help
 
 Keys in search: type to filter · ↑↓ navigate · Enter copy+quit · Esc/Ctrl+C/Ctrl+X quit
 After Enter, paste with Ctrl+V.
@@ -55,7 +70,8 @@ async function doSearch(initialQuery: string): Promise<void> {
 }
 
 async function main(): Promise<void> {
-  const [, , cmd, ...rest] = process.argv;
+  const [, , rawCmd, ...rest] = process.argv;
+  const cmd = rawCmd ? COMMAND_ALIASES[rawCmd] ?? rawCmd : rawCmd;
 
   if (!cmd || cmd === "search") {
     const q = !cmd ? "" : rest.join(" ");
@@ -115,7 +131,7 @@ async function main(): Promise<void> {
     return;
   }
 
-  if (cmd === "rm" || cmd === "remove" || cmd === "delete") {
+  if (cmd === "rm") {
     const target = rest[0];
     if (!target) {
       console.error("Usage: cm rm <id|exact-command>");
@@ -170,7 +186,7 @@ async function main(): Promise<void> {
     return;
   }
 
-  console.error(`Unknown command: ${cmd}\n`);
+  console.error(`Unknown command: ${rawCmd}\n`);
   help();
   process.exit(1);
 }

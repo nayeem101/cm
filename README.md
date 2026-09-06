@@ -43,11 +43,12 @@ bun src/index.ts <args>
 
 ```bash
 cm                                   # interactive search (default)
-cm search [query]                    # search with initial filter
-cm add "<command>" -d "<what it does>" [-t tag1,tag2] [--cwd <path>|auto] [-g]
-cm list [--json]                     # list all entries
-cm rm <id|exact-command>              # delete entry (a non-exact query only lists matches)
-cm edit <id> [--command ...] [--desc ...] [--tags ...] [--cwd ...]
+cm search|s [query]                  # search with initial filter
+cm add|a "<command>" -d "<what it does>" [-t tag1,tag2] [--cwd <path>|auto] [-g]
+cm list|ls|l [--json]                # list all entries
+cm rm|r|del|d <id|exact-command>      # delete entry (a non-exact query only lists matches)
+cm edit|e <id> [--command ...] [--desc ...] [--tags ...] [--cwd ...]
+cm help|h                            # show help
 ```
 
 Examples:
